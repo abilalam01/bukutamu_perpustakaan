@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+    image: modul-web:1.1
+    ports:
+      - "8080:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: modul
+      DB_PASSWORD: rahasia123
+      DB_NAME: bukutamu
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: modul
+      POSTGRES_PASSWORD: rahasia123
+      POSTGRES_DB: bukutamu
+    volumes:
+      - data-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U modul -d bukutamu"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  data-db:

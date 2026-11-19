@@ -1,0 +1,8 @@
+{
+  "name": "buku-tamu-kampus",
+  "version": "1.0.0",
+  "description": "Aplikasi contoh modul Docker: buku tamu kampus",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "pg": "8.13.1" }
+}
